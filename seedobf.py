@@ -44,7 +44,7 @@ def getMatches(fcontents):
 # @dicVars uses the arrVars list and returns a dictionary matching 
 #every $var[num] with their respective word
 
-def reiterate(base):
+def reiterate(base, seed):
 	arrVars = []
 	dicVars = {}
 	for line in base:
@@ -100,9 +100,8 @@ if __name__	== "__main__":
 	if phpfile[len(phpfile)-4:] != '.php':
 		exit("Not a php file, apparently")
 	contents = prepare(phpfile)
-	seed = getSeed(contents)
 	base = getMatches(contents)
-	getDic = reiterate(base)
+	getDic = reiterate(base, getSeed(contents))
 	reFile = newfile(contents, getDic)
 	correctFile = reformat(reFile)
 	if correctFile != []:
